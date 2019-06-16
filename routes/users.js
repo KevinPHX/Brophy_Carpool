@@ -59,12 +59,10 @@ router.post('/register', (req, res, next) => {
         axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
         params: {
           address: Address,
-          key: "AIzaSyAm1tkJQOZCC33-0w_PkblDN_3Yykqkng4"
+          key: "insert geocode key"
         }
       })
       .then(function(response){
-                  // console.log(response);
-                //https://maps.googleapis.com/maps/api/geocode/json?address=3819+E+Quail+Ave&key=AIzaSyAm1tkJQOZCC33-0w_PkblDN_3Yykqkng4
         resultsurl = response.request.res.responseUrl;
         console.log(resultsurl)
         request({
@@ -159,7 +157,7 @@ router.post('/register', (req, res, next) => {
                           axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
                             params: {
                                 address: Address,
-                                key: "AIzaSyAm1tkJQOZCC33-0w_PkblDN_3Yykqkng4"
+                                key: "insert geocode key"
                             }
                           })
                   .then(function(response){
