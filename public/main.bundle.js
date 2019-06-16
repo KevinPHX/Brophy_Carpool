@@ -164,7 +164,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* RouterModule */].forRoot(appRoutes),
                 __WEBPACK_IMPORTED_MODULE_15_angular2_flash_messages__["FlashMessagesModule"],
                 __WEBPACK_IMPORTED_MODULE_5__agm_core__["a" /* AgmCoreModule */].forRoot({
-                    apiKey: 'AIzaSyD_psTAXcXV9eR4FzF_BFe59jDFMAbVM5k'
+                    apiKey: 'insert api key'
                 }),
             ],
             providers: [__WEBPACK_IMPORTED_MODULE_13__services_validate_service__["a" /* ValidateService */], __WEBPACK_IMPORTED_MODULE_14__services_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_16__guards_auth_guard__["a" /* AuthGuard */], __WEBPACK_IMPORTED_MODULE_17__data_service__["a" /* DataService */]],
@@ -339,20 +339,23 @@ var ForgotComponent = /** @class */ (function () {
             this.flashMessage.show("Please use a valid email", { cssClass: 'alert-danger', timeout: 3000 });
             return false;
         }
-        this.authService.forgotUser(user).subscribe(function (data) {
-            if (data) {
-                _this.flashMessage.show("An email has been sent to your account", {
-                    cssClass: "alert-success",
-                    timeout: 5000
-                });
-                _this.router.navigate(['/login']);
-            }
-            else {
-                _this.flashMessage.show(data.msg, {
-                    cssClass: "alert-danger",
-                    timeout: 5000
-                });
-                //this.router.navigate(['/forgot'])
+        this.authService.findUsers().subscribe(function (Data) {
+            for (var i = 0; i < Data.length; i++) {
+                if (user.email !== Data[i].email) {
+                    _this.flashMessage.show("Please enter the email you registered with", { cssClass: 'alert-danger', timeout: 3000 });
+                    return false;
+                }
+                else {
+                    _this.authService.forgotUser(user).subscribe(function (data) {
+                        if (data) {
+                            _this.flashMessage.show("An email has been sent to your account", {
+                                cssClass: "alert-success",
+                                timeout: 5000
+                            });
+                            _this.router.navigate(['/login']);
+                        }
+                    });
+                }
             }
         });
     };
@@ -1104,7 +1107,7 @@ var DataService = /** @class */ (function () {
             console.log(_this.user);
             console.log(_this.username);
             _this.username;
-            return _this.http.get('http://localhost:3000/users/nearby/' + _this.username).map(function (res) { return res.json(); });
+            return _this.http.get('http://138.68.244.231/users/nearby/' + _this.username).map(function (res) { return res.json(); });
         });
     };
     DataService.prototype.ngOnInit = function () {
@@ -1202,39 +1205,39 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.registerUser = function (user) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append("Content-Type", 'application/json');
-        return this.http.post('http://localhost:3000/users/register', user, { headers: headers })
+        return this.http.post('http://138.68.244.231/users/register', user, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     AuthService.prototype.updateUser = function (user) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append("Content-Type", 'application/json');
-        return this.http.post('http://localhost:3000/users/update', user, { headers: headers })
+        return this.http.post('http://138.68.244.231/users/update', user, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     AuthService.prototype.deleteUser = function (id) {
-        return this.http.delete('http://localhost:3000/users/delete/' + id)
+        return this.http.delete('http://138.68.244.231/users/delete/' + id)
             .map(function (res) { return res.json(); });
     };
     AuthService.prototype.authenticateUser = function (user) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append("Content-Type", 'application/json');
-        return this.http.post('http://localhost:3000/users/authenticate', user, { headers: headers })
+        return this.http.post('http://138.68.244.231/users/authenticate', user, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     AuthService.prototype.forgotUser = function (user) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append("Content-Type", 'application/json');
-        return this.http.post('http://localhost:3000/users/forgot', user, { headers: headers })
+        return this.http.post('http://138.68.244.231/users/forgot', user, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     AuthService.prototype.resetUser = function (token, user) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append("Content-Type", 'application/json');
-        return this.http.post('http://localhost:3000/users/reset/' + token, user, { headers: headers })
+        return this.http.post('http://138.68.244.231/users/reset/' + token, user, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     AuthService.prototype.findUsers = function () {
-        return this.http.get("http://localhost:3000/users/contacts")
+        return this.http.get("http://138.68.244.231/users/contacts")
             .map(function (res) { return res.json(); });
     };
     AuthService.prototype.getProfile = function () {
@@ -1242,7 +1245,7 @@ var AuthService = /** @class */ (function () {
         this.loadToken();
         headers.append("Authorization", this.authToken);
         headers.append("Content-Type", 'application/json');
-        return this.http.get('http://localhost:3000/users/profile', { headers: headers })
+        return this.http.get('http://138.68.244.231/users/profile', { headers: headers })
             .map(function (res) { return res.json(); });
     };
     AuthService.prototype.storeUserData = function (token, user) {

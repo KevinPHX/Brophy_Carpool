@@ -53,7 +53,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyD_psTAXcXV9eR4FzF_BFe59jDFMAbVM5k'
+      apiKey: 'insert api key'
     }),
   ],
   providers: [ValidateService, AuthService, AuthGuard, DataService],
