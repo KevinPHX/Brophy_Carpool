@@ -11,7 +11,7 @@
     "ajax": "0.0.4",
     "angular": "^1.6.4",
     "angular-route": "^1.6.4",
-    "async": "^2.6.0",
+    "async": "^3.2.2",
     "axios": "^0.17.1",
     "bcryptjs": "*",
     "body-parser": "*",
