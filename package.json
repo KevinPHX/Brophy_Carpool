@@ -30,7 +30,7 @@
     "password-reset-nodemailer": "0.0.1",
     "randombytes": "^2.0.6",
     "request": "^2.81.0",
-    "webpack": "^3.0.0"
+    "webpack": "^5.75.0"
   },
   "author": "Kevin Yin",
   "license": "ISC",
